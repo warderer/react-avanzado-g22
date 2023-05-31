@@ -1,10 +1,12 @@
 import './App.css'
-import SimpleForm from './pages/SimpleForm'
+import FormHook from './pages/FormHook'
+// import SimpleForm from './pages/SimpleForm'
 
 function App () {
   return (
     <>
-      <SimpleForm />
+      {/* <SimpleForm /> */}
+      <FormHook />
     </>
   )
 }
