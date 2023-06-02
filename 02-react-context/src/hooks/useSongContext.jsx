@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import SongContext from '@/context/SongContext'
+import { SongContext } from '@/context/SongContext'
 
 // Paso 3. Crear un hook para usar el contexto
 export const useSongContext = () => {
