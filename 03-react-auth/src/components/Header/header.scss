@@ -1,3 +1,15 @@
+$menu-color: #3d3d3d;
+
+@mixin header-link {
+    color: $menu-color;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+@mixin header-border($size:2px ){
+    border-bottom: solid $size $menu-color;
+}
+
 .header {
     background-color: #dadada;
     display: flex;
@@ -6,9 +18,7 @@
     padding: 15px 30px;
 
     &__logo {
-        color: #3d3d3d;
-        text-decoration: none;
-        letter-spacing: 2px;
+        @include header-link;
     }
 
     &__nav-list {
@@ -19,12 +29,14 @@
     }
 
     &__item-link {
-        color: #3d3d3d;
-        text-decoration: none;
-        letter-spacing: 2px;
+        @include header-link;
+
+        &--is-active {
+            @include header-border($size:3px);
+        }
 
         &:hover {
-            border-bottom: solid 2px #3d3d3d;
+            @include header-border;
         }
     }
 }
