@@ -1,10 +1,23 @@
+import { useNavigate } from 'react-router-dom'
 import useForm from '@/hooks/useForm'
+import { registerUserService } from '@/services/userService'
 import logo from '@/assets/react.svg'
 import '@/styles/form.css'
 
 const Signup = () => {
-  const sendData = (data) => {
-    console.log(data)
+  // useNavigate() es un hook de react-router-dom que nos permite navegar entre rutas
+  const navigate = useNavigate()
+
+  const sendData = async (data) => {
+    try {
+      const response = await registerUserService(data)
+      if (response.status === 201) {
+        navigate('/login')
+        // console.log('Usuario creado correctamente', response.data)
+      }
+    } catch (error) {
+      console.log('Ocurrio un error:', error.message)
+    }
   }
 
   const { input, handleSubmit, handleInputChange } = useForm(sendData, {
@@ -88,8 +101,8 @@ const Signup = () => {
           <label htmlFor='password'>Password</label>
         </div>
 
-        <button className='w-100 btn btn-lg btn-primary' type='submit'>Sign in</button>
-        <p className='mt-5 mb-3 text-muted'>© 2017–2022</p>
+        <button className='w-100 btn btn-lg btn-primary' type='submit'>Sign up</button>
+        <p className='mt-5 mb-3 text-muted'>© 2017–2023</p>
       </form>
     </main>
   )
