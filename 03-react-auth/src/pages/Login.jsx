@@ -5,8 +5,21 @@ import logo from '@/assets/react.svg'
 import '@/styles/form.css'
 
 const Login = () => {
+  const navigate = useNavigate()
+
   const sendData = async (data) => {
-    console.log(data)
+    try {
+      const response = await loginUserService(data)
+      if (response.status === 200) {
+        // Guardamos el token en el local storage del navegador
+        // Este dato permanece aún si el navegador se cierra y vuelve a abrir
+        localStorage.setItem('token', response.data.token)
+        navigate('/dashboard')
+        // console.log('Usuario creado correctamente', response.data)
+      }
+    } catch (error) {
+      console.log('Ocurrio un error:', error.message)
+    }
   }
 
   const { input, handleSubmit, handleInputChange } = useForm(sendData, {
