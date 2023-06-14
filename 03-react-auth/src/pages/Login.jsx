@@ -1,10 +1,22 @@
+import useForm from '@/hooks/useForm'
+import { useNavigate } from 'react-router-dom'
+import { loginUserService } from '@/services/userService'
 import logo from '@/assets/react.svg'
 import '@/styles/form.css'
 
 const Login = () => {
+  const sendData = async (data) => {
+    console.log(data)
+  }
+
+  const { input, handleSubmit, handleInputChange } = useForm(sendData, {
+    email: '',
+    password: ''
+  })
+
   return (
     <main className='form-signin w-100 m-auto'>
-      <form>
+      <form onSubmit={handleSubmit}>
         <img className='mb-4' src={logo} alt='React' width='72' height='57' />
         <h1 className='h3 mb-3 fw-normal'>Please sign in</h1>
 
@@ -14,8 +26,9 @@ const Login = () => {
             className='form-control'
             id='floatingInput'
             placeholder='name@example.com'
-            value=''
-            onChange={() => {}}
+            name='email'
+            value={input.email}
+            onChange={handleInputChange}
           />
           <label htmlFor='floatingInput'>Email address</label>
         </div>
@@ -26,8 +39,9 @@ const Login = () => {
             className='form-control'
             id='floatingPassword'
             placeholder='Password'
-            value=''
-            onChange={() => {}}
+            name='password'
+            value={input.password}
+            onChange={handleInputChange}
           />
           <label htmlFor='floatingPassword'>Password</label>
         </div>
