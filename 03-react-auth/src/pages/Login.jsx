@@ -1,19 +1,19 @@
 import useForm from '@/hooks/useForm'
 import { useNavigate } from 'react-router-dom'
 import { loginUserService } from '@/services/userService'
+import { useAuthContext } from '@/hooks/useAuth'
 import logo from '@/assets/react.svg'
 import '@/styles/form.css'
 
 const Login = () => {
+  const { login } = useAuthContext()
   const navigate = useNavigate()
 
   const sendData = async (data) => {
     try {
       const response = await loginUserService(data)
       if (response.status === 200) {
-        // Guardamos el token en el local storage del navegador
-        // Este dato permanece aún si el navegador se cierra y vuelve a abrir
-        localStorage.setItem('token', response.data.token)
+        login(response.data.token)
         navigate('/dashboard')
         // console.log('Usuario creado correctamente', response.data)
       }
