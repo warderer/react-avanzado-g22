@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { getAllItems } from '@/services/itemServices'
 
 const Home = () => {
-  const [itemsData, setItemsData] = useState({})
+  const [itemsData, setItemsData] = useState(null)
 
   useEffect(() => {
     const fetchItemData = async () => {
@@ -23,7 +23,7 @@ const Home = () => {
       <h1>Home</h1>
       <div className='d-flex flex-row flex-wrap justify-content-center'>
         {/* Si itemsData no esta vacio, recorro el arreglo con Map y creo un Card de Bootstrap para cada elemento */}
-        {itemsData && itemsData.map((product) => (
+        {itemsData && itemsData?.map((product) => (
           <div className='card' style={{ width: '18rem' }} key={product.id}>
             <img className='card-img-top' style={{ maxHeight: '300px' }} src={product.image} alt={product.product_name} />
             <div className='card-body'>
