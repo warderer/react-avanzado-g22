@@ -23,3 +23,13 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('doLogin', (email, password) => {
+  cy.get('input[name="email"]').type(email)
+  cy.get('input[name="email"]').should('have.value', email)
+
+  cy.get('input[name="password"]').type(password)
+  cy.get('input[name="password"]').should('have.value', password)
+
+  cy.get('button[type="submit"]').click()
+})

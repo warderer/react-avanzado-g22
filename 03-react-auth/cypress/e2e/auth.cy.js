@@ -15,9 +15,7 @@ describe('Funcionalidad de Login', () => {
     cy.visit('/login')
 
     // 02. Act: Interactuar con la aplicación
-    cy.get('input[name="email"]').type('drstrange@marvel.com')
-    cy.get('input[name="password"]').type('multiverso')
-    cy.get('button[type="submit"]').click()
+    cy.doLogin('drstrange@marvel.com', 'multiverso')
 
     cy.wait('@login')
 
@@ -30,12 +28,9 @@ describe('Funcionalidad de Login', () => {
     cy.visit('/login')
 
     // 02. Act: Interactuar con la aplicación
-    cy.get('input[name="email"]').type('superman@dc.com')
-    cy.get('input[name="password"]').type('superman')
-    cy.get('button[type="submit"]').click()
+    cy.doLogin('superman@dc.com', 'superman')
 
     cy.wait('@login')
-
     cy.get('nav > ul > li:last').click()
 
     cy.get('h1').contains('Please sign in') // 03. Assert: Espero un resultado
